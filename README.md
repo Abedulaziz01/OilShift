@@ -98,19 +98,13 @@ See `results/plots/` and `results/summary_table.csv` for visuals and details.
 
 ---
 
-## 🗓️ Next Steps
+🗓️ Upcoming Milestones
 
-- [ ] **Task 2:** Bayesian change point modeling in PyMC3
-- [ ] **Task 3:** Flask/React interactive dashboard
-- [ ] **Final:** Comprehensive report & slides
+- [ ] Task 2: Implement Bayesian change point detection using PyMC3
+- [ ] Task 3: Develop an interactive dashboard with Flask and React
+- [ ] Final Deliverable: Prepare a comprehensive report and presentation slides
 
----
+📚 Data Sources
 
-## 📚 Data Sources
-
-- **Brent Oil Prices:** EIA or equivalent
-- **Key Events:** Compiled from OPEC, EIA, BBC, Reuters
-
-## 📬 Contact
-
-_Questions?_ Reach out at \[smucav@gmail.com].
+- Brent Crude Oil Prices: Sourced from the U.S. Energy Information Administration (EIA) or equivalent databases
+- Major Global Events: Curated from OPEC, EIA, BBC, and Reuters archives
