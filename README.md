@@ -1,12 +1,12 @@
-# OilShift: Brent Oil Price Change Point Analysis
+Through Bayesian Analysis
+📊 Overview
+OilShift investigates the impact of major geopolitical and economic events on Brent crude oil prices from 1987 to 2022, leveraging Bayesian change point detection to uncover structural shifts in market behavior. The project aims to provide strategic insights for investors, policymakers, and energy stakeholders navigating oil price volatility.
+🔧 Project Milestones
 
-## 📈 Project Overview
-
-OilShift explores how major geopolitical and economic events influence Brent oil prices (1987–2022) using **Bayesian change point detection**. The goal is to deliver actionable insights for investors, policymakers, and energy firms facing oil market volatility.
-
-- **Task 1**: Robust EDA and data preparation ✅
-- **Task 2**: Bayesian modeling (PyMC3) 🔜
-- **Task 3**: Interactive dashboard (Flask + React) 🔜
+- ✅ Phase 1: Comprehensive exploratory data analysis and preprocessing completed
+- 🔜 Phase 2: Bayesian modeling implementation using PyMC3
+- 🔜 Phase 3: Deployment of an interactive dashboard built with Flask + React
+- 🔜 Phase 4: Final report and slides
 
 ---
 
