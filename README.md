@@ -4,9 +4,9 @@
 
 OilShift explores how major geopolitical and economic events influence Brent oil prices (1987–2022) using **Bayesian change point detection**. The goal is to deliver actionable insights for investors, policymakers, and energy firms facing oil market volatility.
 
-* **Task 1**: Robust EDA and data preparation ✅
-* **Task 2**: Bayesian modeling (PyMC3) 🔜
-* **Task 3**: Interactive dashboard (Flask + React) 🔜
+- **Task 1**: Robust EDA and data preparation ✅
+- **Task 2**: Bayesian modeling (PyMC3) 🔜
+- **Task 3**: Interactive dashboard (Flask + React) 🔜
 
 ---
 
@@ -77,10 +77,10 @@ Outputs are saved to `data/processed/` and `results/`.
 
 ## 🔍 Task 1: EDA Summary
 
-* **Price Series:** Non-stationary. ADF: -1.9939 (p = 0.2893). Peaks (2008 \~\$143.95), drops (2014, 2020).
-* **Log Returns:** Stationary. ADF: -16.4271 (p < 0.0001). Used for volatility insights.
-* **Volatility:** 30-day rolling std shows clustering during crises (2008, 2020).
-* **Events:** 12 key events overlaid for context.
+- **Price Series:** Non-stationary. ADF: -1.9939 (p = 0.2893). Peaks (2008 \~\$143.95), drops (2014, 2020).
+- **Log Returns:** Stationary. ADF: -16.4271 (p < 0.0001). Used for volatility insights.
+- **Volatility:** 30-day rolling std shows clustering during crises (2008, 2020).
+- **Events:** 12 key events overlaid for context.
 
 **Summary Stats:**
 
@@ -100,17 +100,17 @@ See `results/plots/` and `results/summary_table.csv` for visuals and details.
 
 ## 🗓️ Next Steps
 
-* [ ] **Task 2:** Bayesian change point modeling in PyMC3
-* [ ] **Task 3:** Flask/React interactive dashboard
-* [ ] **Final:** Comprehensive report & slides
+- [ ] **Task 2:** Bayesian change point modeling in PyMC3
+- [ ] **Task 3:** Flask/React interactive dashboard
+- [ ] **Final:** Comprehensive report & slides
 
 ---
 
 ## 📚 Data Sources
 
-* **Brent Oil Prices:** EIA or equivalent
-* **Key Events:** Compiled from OPEC, EIA, BBC, Reuters
+- **Brent Oil Prices:** EIA or equivalent
+- **Key Events:** Compiled from OPEC, EIA, BBC, Reuters
 
 ## 📬 Contact
 
-*Questions?* Reach out at \[smucav@gmail.com].
+_Questions?_ Reach out at \[smucav@gmail.com].
