@@ -1,3 +1,4 @@
+
 OilShift: Detecting Structural Shifts in Brent Crude Oil Prices (1987–2022)
 OilShift is a data-driven investigation into how major geopolitical and economic events have influenced Brent crude oil prices over the past 35 years. By applying Bayesian change point detection, the project identifies key structural shifts in market behavior, offering strategic insights for investors, policymakers, and energy analysts navigating oil price volatility.
 
@@ -92,6 +93,7 @@ Summary Statistics
 - Std Dev Log Return: 0.025532
 - Total Observations: 9,011
 Visuals and detailed metrics are available in results/plots/ and results/summary_table.csv.
+
 
 
 
