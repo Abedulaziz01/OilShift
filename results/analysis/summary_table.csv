@@ -1,0 +1,11 @@
+Metric,Value
+Mean Price,48.4208
+Std Price,32.8601
+Min Price,9.1
+Max Price,143.95
+Mean Log Return,0.000179
+Std Log Return,0.025532
+Rows After Cleaning,9011.0
+Price ADF p-value,0.289274
+Return ADF p-value,0.0
+Detected Change Points,4.0

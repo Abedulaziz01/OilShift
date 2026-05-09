@@ -25,14 +25,26 @@ st.set_page_config(
 )
 
 
+PALETTE = {
+    "ink": "#1f2937",
+    "sand": "#f5efe5",
+    "paper": "#fffaf2",
+    "gold": "#c27c2c",
+    "teal": "#0f766e",
+    "navy": "#1d4ed8",
+    "coral": "#c2410c",
+    "brick": "#b42318",
+}
+
+
 CUSTOM_CSS = """
 <style>
     .stApp {
         background:
-            radial-gradient(circle at top left, rgba(255, 213, 128, 0.35), transparent 30%),
-            radial-gradient(circle at top right, rgba(37, 99, 235, 0.14), transparent 28%),
-            linear-gradient(180deg, #f8f5ef 0%, #fffdf9 48%, #f3f0ea 100%);
-        color: #172033;
+            radial-gradient(circle at top left, rgba(194, 124, 44, 0.24), transparent 30%),
+            radial-gradient(circle at top right, rgba(15, 118, 110, 0.14), transparent 28%),
+            linear-gradient(180deg, #f7f2e8 0%, #fffaf2 48%, #efe5d6 100%);
+        color: #1f2937;
     }
     .block-container {
         padding-top: 2.2rem;
@@ -41,8 +53,8 @@ CUSTOM_CSS = """
     .hero-card {
         padding: 1.4rem 1.5rem;
         border-radius: 20px;
-        background: linear-gradient(135deg, rgba(18, 24, 38, 0.94), rgba(70, 33, 10, 0.88));
-        color: #f7f1e8;
+        background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(11, 94, 87, 0.88));
+        color: #f9f5ee;
         box-shadow: 0 20px 40px rgba(41, 32, 18, 0.12);
         margin-bottom: 1rem;
     }
@@ -67,9 +79,51 @@ CUSTOM_CSS = """
     .section-note {
         padding: 0.9rem 1rem;
         border-radius: 16px;
-        border: 1px solid rgba(140, 120, 84, 0.22);
-        background: rgba(255, 250, 242, 0.7);
+        border: 1px solid rgba(194, 124, 44, 0.22);
+        background: rgba(255, 250, 242, 0.82);
         margin-bottom: 1rem;
+    }
+    [data-testid="stMetric"] {
+        background: rgba(255, 250, 242, 0.9);
+        border: 1px solid rgba(194, 124, 44, 0.18);
+        border-radius: 18px;
+        padding: 0.8rem 1rem;
+        box-shadow: 0 10px 24px rgba(31, 41, 55, 0.06);
+    }
+    [data-testid="stMetricLabel"] {
+        color: #475569;
+        font-weight: 600;
+    }
+    [data-testid="stMetricValue"] {
+        color: #111827;
+    }
+    [data-testid="stMetricDelta"] {
+        color: #0f766e;
+    }
+    .stTabs [data-baseweb="tab-list"] {
+        gap: 0.45rem;
+        background: rgba(255, 250, 242, 0.76);
+        border: 1px solid rgba(194, 124, 44, 0.18);
+        border-radius: 16px;
+        padding: 0.35rem;
+    }
+    .stTabs [data-baseweb="tab"] {
+        height: auto;
+        white-space: nowrap;
+        border-radius: 12px;
+        color: #334155;
+        background: transparent;
+        padding: 0.55rem 0.95rem;
+        font-weight: 600;
+    }
+    .stTabs [aria-selected="true"] {
+        background: linear-gradient(135deg, rgba(194, 124, 44, 0.16), rgba(15, 118, 110, 0.12));
+        color: #111827;
+        border: 1px solid rgba(194, 124, 44, 0.28);
+    }
+    .stTabs [data-baseweb="tab"]:hover {
+        background: rgba(194, 124, 44, 0.08);
+        color: #111827;
     }
 </style>
 """
@@ -113,6 +167,54 @@ def render_metric_row(summary: dict) -> None:
     col4.metric("Detected Breaks", str(summary["change_point_count"]))
 
 
+def style_figure(figure: go.Figure, height: int) -> go.Figure:
+    figure.update_layout(
+        height=height,
+        margin=dict(l=10, r=10, t=50, b=10),
+        paper_bgcolor="rgba(255,255,255,0.72)",
+        plot_bgcolor="rgba(255,250,242,0.92)",
+        font=dict(color=PALETTE["ink"]),
+        title_font=dict(size=20, color=PALETTE["ink"]),
+    )
+    figure.update_xaxes(showgrid=True, gridcolor="rgba(148, 163, 184, 0.18)")
+    figure.update_yaxes(showgrid=True, gridcolor="rgba(148, 163, 184, 0.18)")
+    return figure
+
+
+def add_vertical_marker(
+    figure: go.Figure,
+    when: pd.Timestamp,
+    color: str,
+    label: str | None = None,
+    line_dash: str = "dash",
+    line_width: float = 1.6,
+) -> None:
+    marker_x = pd.Timestamp(when).to_pydatetime()
+    figure.add_shape(
+        type="line",
+        x0=marker_x,
+        x1=marker_x,
+        y0=0,
+        y1=1,
+        xref="x",
+        yref="paper",
+        line=dict(color=color, width=line_width, dash=line_dash),
+    )
+    if label:
+        figure.add_annotation(
+            x=marker_x,
+            y=1,
+            xref="x",
+            yref="paper",
+            text=label,
+            showarrow=False,
+            yshift=8,
+            xanchor="left",
+            font=dict(size=10, color=color),
+            bgcolor="rgba(255,250,242,0.88)",
+        )
+
+
 def build_price_figure(price_df: pd.DataFrame, events_df: pd.DataFrame) -> go.Figure:
     figure = px.line(
         price_df,
@@ -122,7 +224,7 @@ def build_price_figure(price_df: pd.DataFrame, events_df: pd.DataFrame) -> go.Fi
         title="Brent Crude Price History",
         labels={"Price": "USD per barrel"},
     )
-    figure.update_traces(line=dict(color="#b45309", width=2.5))
+    figure.update_traces(line=dict(color=PALETTE["gold"], width=2.5))
 
     marker_events = events_df.head(12).copy()
     merged = pd.merge_asof(
@@ -137,14 +239,13 @@ def build_price_figure(price_df: pd.DataFrame, events_df: pd.DataFrame) -> go.Fi
             x=merged["event_date"],
             y=merged["Price"],
             mode="markers",
-            marker=dict(size=9, color="#1d4ed8", line=dict(color="#ffffff", width=1)),
+            marker=dict(size=9, color=PALETTE["navy"], line=dict(color="#ffffff", width=1)),
             name="Key events",
             text=merged["event_name"],
             hovertemplate="%{text}<br>%{x|%Y-%m-%d}<br>$%{y:.2f}<extra></extra>",
         )
     )
-    figure.update_layout(height=440, margin=dict(l=10, r=10, t=50, b=10))
-    return figure
+    return style_figure(figure, 440)
 
 
 def build_volatility_figure(price_df: pd.DataFrame) -> go.Figure:
@@ -157,9 +258,8 @@ def build_volatility_figure(price_df: pd.DataFrame) -> go.Figure:
         title="30-Day Rolling Volatility of Log Returns",
         labels={"RollingVolatility30D": "Annualized volatility"},
     )
-    figure.update_traces(line=dict(color="#0f766e", width=2.2))
-    figure.update_layout(height=360, margin=dict(l=10, r=10, t=50, b=10))
-    return figure
+    figure.update_traces(line=dict(color=PALETTE["teal"], width=2.2))
+    return style_figure(figure, 360)
 
 
 def build_change_point_figure(price_df: pd.DataFrame, change_points_df: pd.DataFrame) -> go.Figure:
@@ -171,20 +271,17 @@ def build_change_point_figure(price_df: pd.DataFrame, change_points_df: pd.DataF
         title="Detected Structural Shifts Against the Price Series",
         labels={"Price": "USD per barrel"},
     )
-    figure.update_traces(line=dict(color="#7c3aed", width=2.2))
+    figure.update_traces(line=dict(color=PALETTE["ink"], width=2.3))
 
     for _, row in change_points_df.iterrows():
-        figure.add_vline(
-            x=row["change_date"],
-            line_width=1.5,
-            line_dash="dash",
-            line_color="#b91c1c",
-            annotation_text=row["change_date"].strftime("%Y-%m-%d"),
-            annotation_position="top left",
+        add_vertical_marker(
+            figure,
+            when=row["change_date"],
+            color=PALETTE["brick"],
+            label=pd.Timestamp(row["change_date"]).strftime("%Y-%m-%d"),
         )
 
-    figure.update_layout(height=430, margin=dict(l=10, r=10, t=50, b=10))
-    return figure
+    return style_figure(figure, 430)
 
 
 def build_event_window_figure(price_df: pd.DataFrame, event_row: pd.Series, window_days: int = 60) -> go.Figure:
@@ -201,10 +298,9 @@ def build_event_window_figure(price_df: pd.DataFrame, event_row: pd.Series, wind
         title=f"Price Window Around {event_row['event_name']}",
         labels={"Price": "USD per barrel"},
     )
-    figure.update_traces(line=dict(color="#92400e", width=2.5))
-    figure.add_vline(x=event_date, line_width=2, line_dash="dash", line_color="#0f172a")
-    figure.update_layout(height=360, margin=dict(l=10, r=10, t=50, b=10))
-    return figure
+    figure.update_traces(line=dict(color=PALETTE["coral"], width=2.5))
+    add_vertical_marker(figure, when=event_date, color=PALETTE["navy"], label="Event Date", line_width=2)
+    return style_figure(figure, 360)
 
 
 def show_data_requirements() -> None:

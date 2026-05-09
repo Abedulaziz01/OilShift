@@ -1,0 +1,10 @@
+{
+  "observations": 9011,
+  "start_date": "1987-05-20",
+  "end_date": "2022-11-14",
+  "mean_price": 48.42078237709466,
+  "median_price": 38.57,
+  "latest_price": 93.59,
+  "change_point_count": 4,
+  "detection_method": "offline_gaussian_segmentation"
+}

@@ -1,4 +1,4 @@
-name: FraudPulse CI
+name: OilShift CI
 
 on:
   push:
@@ -10,15 +10,14 @@ jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: "3.11"
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-      - name: Lint code
+      - name: Compile project
         run: |
-          echo ✅ Code check placeholder — passes for now.
-
+          python -m compileall app.py oilshift scripts
