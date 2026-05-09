@@ -10,7 +10,6 @@ venv/
 ENV/
 .env
 *.env
-
 # Jupyter/Colab-specific ignores
 .ipynb_checkpoints/
 *.ipynb_checkpoints
@@ -30,9 +29,11 @@ pip-selfcheck.json
 dist/
 build/
 
-# Data files (exclude large raw datasets if not intended for sharing)
-# Uncomment the following if BrentOilPrices.csv is too large or sensitive
-# data/raw/BrentOilPrices.csv
+# Data files
+data/*
+!data/events/
+data/events/*
+!data/events/key_events.csv
 
 # Temporary and cache files
 *.log
@@ -54,5 +55,3 @@ build/
 *.tar.gz
 *.tgz
 *.rar
-
-/data
