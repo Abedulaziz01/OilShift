@@ -1,38 +1,35 @@
-import pandas as pd
-import numpy as np
-import os
+from __future__ import annotations
 
-def load_and_clean_data(input_path, output_path):
-    """Load and clean Brent oil price data."""
-    data = pd.read_csv(input_path)
-    data['Date'] = pd.to_datetime(data['Date'], format='mixed')
-    data['Date'] = data['Date'].dt.strftime('%Y-%m-%d')
-    data['Date'] = pd.to_datetime(data['Date'])
+import argparse
+import sys
+from pathlib import Path
 
-    print("Initial Duplicate Rows:", data.duplicated().sum())
-    print("Duplicate Dates:", data['Date'].duplicated().sum())
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-    data = data.drop_duplicates(subset=['Date'], keep='first')
-    print("Rows After Deduplication:", len(data))
+from oilshift.data import export_processed_data, load_price_data, locate_default_price_data
 
-    print("Missing Values:", data.isnull().sum())
 
-    data.set_index('Date', inplace=True)
-    data.to_csv(output_path)
-    return data
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description="Clean Brent oil price data and compute derived metrics.")
+    parser.add_argument("--price-data", type=str, default=None, help="Path to Brent oil prices CSV.")
+    parser.add_argument("--output", type=str, default="data/processed", help="Output directory.")
+    return parser.parse_args()
 
-def compute_log_returns(data, output_path):
-    """Compute log returns and save to CSV."""
-    data['Log_Returns'] = np.log(data['Price']).diff()
-    data[['Log_Returns']].to_csv(output_path)
-    return data
+
+def main() -> None:
+    args = parse_args()
+    price_path = args.price_data or locate_default_price_data()
+    if price_path is None:
+        raise FileNotFoundError(
+            "Brent price CSV not found. Pass --price-data or place BrentOilPrices.csv in data/raw/."
+        )
+
+    price_df = load_price_data(price_path)
+    export_processed_data(price_df, args.output)
+    print(f"Cleaned data written to {args.output}")
+
 
 if __name__ == "__main__":
-    os.makedirs('data/processed', exist_ok=True)
-
-    raw_data_path = 'data/raw/BrentOilPrices.csv'
-    cleaned_data_path = 'data/processed/brent_oil_prices_cleaned.csv'
-    log_returns_path = 'data/processed/log_returns.csv'
-
-    data = load_and_clean_data(raw_data_path, cleaned_data_path)
-    data = compute_log_returns(data, log_returns_path)
+    main()

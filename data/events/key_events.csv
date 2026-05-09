@@ -1,0 +1,16 @@
+event_date,event_name,category,description,region
+1990-08-02,Iraq invades Kuwait,Conflict,"The invasion triggered a major supply shock and a rapid repricing of geopolitical risk.",Middle East
+1997-11-27,OPEC output quota increase,OPEC Policy,"OPEC raised production targets ahead of weakening demand during the Asian financial crisis.",Global
+1998-12-01,OPEC production cuts,OPEC Policy,"OPEC and major producers coordinated output cuts after a steep oil price decline.",Global
+2001-09-11,September 11 attacks,Geopolitical Shock,"The attacks intensified macro uncertainty and altered expectations for transport fuel demand.",United States
+2003-03-20,US-led invasion of Iraq,Conflict,"The Iraq war increased uncertainty around Middle East supply and export continuity.",Middle East
+2008-09-15,Global financial crisis intensifies,Macroeconomic Shock,"Lehman Brothers collapsed and recession fears drove a severe demand outlook revision.",Global
+2010-12-17,Arab Spring begins,Political Upheaval,"Regional instability reshaped expectations for oil supply resilience across North Africa and the Middle East.",Middle East and North Africa
+2011-02-15,Libyan civil war escalates,Conflict,"Libyan production outages tightened supply expectations in light sweet crude markets.",North Africa
+2014-11-27,OPEC keeps output unchanged,OPEC Policy,"OPEC maintained output despite falling prices, accelerating the 2014 to 2015 oil market slide.",Global
+2016-11-30,OPEC+ agrees coordinated cuts,OPEC Policy,"OPEC and partners announced production cuts to stabilize the market after prolonged weakness.",Global
+2018-11-05,US sanctions on Iran reimposed,Sanctions,"Sanctions constrained Iranian oil exports and altered supply expectations.",Middle East
+2020-03-06,OPEC+ talks collapse,Price War,"OPEC+ failed to agree on cuts, triggering a price war and sharp market selloff.",Global
+2020-04-20,COVID-19 demand shock,Crisis,"Pandemic lockdowns and storage stress drove extreme dislocations across global oil markets.",Global
+2021-11-26,Omicron demand fears,Crisis,"The Omicron variant renewed concerns about travel restrictions and weaker oil demand.",Global
+2022-02-24,Russia invades Ukraine,Conflict,"The invasion disrupted energy trade expectations and sharply raised geopolitical risk premia.",Europe and Global
