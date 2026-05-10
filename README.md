@@ -435,4 +435,4 @@ That makes the project easier to:
 ## License
 
 Use this repository for academic, portfolio, or internal demonstration work unless your organization requires a different license model.
-contact me for collaborating @avduvaio@gmail.com
+contact me for collaborating @abduvaio@gmail.com
