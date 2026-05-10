@@ -85,14 +85,14 @@ flowchart TD
 
 ### Component Roles
 
-| Component | Purpose |
-|---|---|
-| `oilshift.data` | Validates Brent price data, normalizes dates, and computes derived series |
-| `oilshift.change_point` | Detects structural breaks in the transformed time series |
-| `oilshift.reporting` | Builds stationarity checks, event associations, and export-ready summaries |
-| `oilshift.visualization` | Produces Python-generated plots for reporting and reuse |
-| `app.py` | Serves the Streamlit dashboard for stakeholder exploration |
-| `scripts/` | Provides CLI entrypoints for preprocessing, reporting, and full builds |
+| Component                | Purpose                                                                    |
+| ------------------------ | -------------------------------------------------------------------------- |
+| `oilshift.data`          | Validates Brent price data, normalizes dates, and computes derived series  |
+| `oilshift.change_point`  | Detects structural breaks in the transformed time series                   |
+| `oilshift.reporting`     | Builds stationarity checks, event associations, and export-ready summaries |
+| `oilshift.visualization` | Produces Python-generated plots for reporting and reuse                    |
+| `app.py`                 | Serves the Streamlit dashboard for stakeholder exploration                 |
+| `scripts/`               | Provides CLI entrypoints for preprocessing, reporting, and full builds     |
 
 ## Workflow
 
@@ -435,3 +435,4 @@ That makes the project easier to:
 ## License
 
 Use this repository for academic, portfolio, or internal demonstration work unless your organization requires a different license model.
+contact me for collaborating @avduvaio@gmail.com
