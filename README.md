@@ -416,6 +416,7 @@ That makes the project easier to:
 - Written report or blog post for narrative insight
 - Slide deck for policy or executive review
 - CSV exports for analyst follow-up work
+  - CSVs can be exported from the sidebar
 
 ## Troubleshooting
 
